@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom/client';
+import ReactDOM from 'react-dom';
 import BreakLength from './components/BreakLength';
 import SessionLength from './components/SessionLength';
 import Timer from './components/Timer';
@@ -100,15 +100,18 @@ function App() {
     setTimeLeft("25:00");
     setMinutes(25);
     setSeconds(0);
+    setTimerIsRunning(false);
+    audioRef.current.pause();
+    audioRef.current.currentTime = 0;
   }
 
   React.useEffect(() => {
-    console.log("seconds: " + seconds);
-  }, [seconds])
-
-  React.useEffect(() => {
-    console.log("minutes: " + minutes);
-  }, [minutes])
+    if (seconds === 0 && minutes === 0) {
+      console.log("timer reached 0");
+      /* make a beeping sound */
+      audioRef.current.play();
+    }
+  }, [seconds, minutes])
 
   React.useEffect(() => {
     if (timerIsRunning) {
@@ -125,18 +128,17 @@ function App() {
             setMinutes((prevMinutes) => prevMinutes - 1);
             setSeconds(59);
           } else if (seconds === 0 && minutes === 0) {
-            console.log("timer reached 0");
-            /* make a beeping sound */
-            audioRef.current.play();
-            /* switch mode and update minutes and seconds */
             setCurrentMode((prevCurrentMode) => {
               if (prevCurrentMode === "Session") {
+                console.log("Breaklength: " + breakLength);
                 setMinutes(breakLength);
                 setSeconds(0);
+                setTimeLeft(formatTime(breakLength, 0));
                 return "Break";
               } else {
                 setMinutes(sessionLength);
                 setSeconds(0);
+                setTimeLeft(formatTime(sessionLength, 0));
                 return "Session";
               }
             })
@@ -185,4 +187,5 @@ function App() {
   )
 }
 
-ReactDOM.createRoot(document.getElementById('root')).render(<App />); 
+ReactDOM.render(<App />,document.getElementById("root"));
+// ReactDOM.createRoot(document.getElementById('root')).render(<App />); 
