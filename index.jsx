@@ -11,31 +11,69 @@ function App() {
   const [currentMode, setCurrentMode] = React.useState("Session");
   const [timeLeft, setTimeLeft] = React.useState("25:00");
 
+  /* given minutes and seconds, returns a string in the format of mm:ss adding 0's if necessary */
+  function formatTime(minutes, seconds) {
+    let result = "";
+    if (minutes <= 9) {
+      result += "0" + minutes;
+    } else {
+      result += minutes;
+    }
+    result += ":";
+    if (seconds <= 9) {
+      result += "0" + seconds;
+    } else {
+      result += seconds;
+    }
+
+    return result;
+  }
+
   function updateBreakLength(isIncrement) {
     if (isIncrement) {
-      if (currentMode === "Break") {
-        setTimeLeft(`${breakLength + 1}:00`);
+      /* check if user input is valid */
+      if (breakLength !== 60) {
+        /* check if we need to update the timer label */
+        if (currentMode === "Break") {
+          setTimeLeft(formatTime(breakLength + 1, 0));
+        }
+
+        setBreakLength((prevBreakLength) => prevBreakLength + 1);
       }
-      setBreakLength((prevBreakLength) => prevBreakLength + 1);
     } else {
-      if (currentMode === "Break") {
-        setTimeLeft(`${breakLength - 1}:00`);
+      /* check if user input is valid */
+      if (breakLength !== 1) {
+        /* check if we need to update the timer label */
+        if (currentMode === "Break") {
+          setTimeLeft(formatTime(breakLength - 1, 0));
+        }
+
+        setBreakLength((prevBreakLength) => prevBreakLength - 1);
       }
-      setBreakLength((prevBreakLength) => prevBreakLength - 1);
     }
   }
 
   function updateSessionLength(isIncrement) {
     if (isIncrement) {
-      if (currentMode === "Session") {
-        setTimeLeft(`${sessionLength + 1}:00`);
+      /* check if user input is valid */
+      if (sessionLength !== 60) {
+        /* check if we need to update the timer label */
+        if (currentMode === "Session") {
+          setTimeLeft(formatTime(sessionLength + 1, 0));
+        }
+
+        setSessionLength((prevSessionLength) => prevSessionLength + 1);
       }
-      setSessionLength((prevSessionLength) => prevSessionLength + 1);
     } else {
-      if (currentMode === "Session") {
-        setTimeLeft(`${sessionLength - 1}:00`);
+      /* check if user input is valid */
+      if (sessionLength !== 1) {
+        /* check if we need to update the timer label */
+        if (currentMode === "Session") {
+          setTimeLeft(formatTime(sessionLength - 1, 0));
+        }
+
+        setSessionLength((prevSessionLength) => prevSessionLength - 1);
       }
-      setSessionLength((prevSessionLength) => prevSessionLength - 1);
     }
   }
 
