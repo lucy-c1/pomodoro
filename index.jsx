@@ -77,6 +77,13 @@ function App() {
     }
   }
 
+  function reset() {
+    setBreakLength(5);
+    setSessionLength(25);
+    setCurrentMode("Session");
+    setTimeLeft("25:00");
+  }
+
   return (
     <div className = "app-container">
       <h1>Pomodoro Clock</h1>
@@ -94,7 +101,9 @@ function App() {
       currentMode = {currentMode}
       timeLeft = {timeLeft}
       />
-      <Controls />
+      <Controls 
+      reset = {reset}
+      />
       <p id = "credit">by <a href="https://github.com/lucy-c1/pomodoro" target='_blank'>lucy-c1</a></p>
     </div>
   )
