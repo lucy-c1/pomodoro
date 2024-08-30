@@ -11,15 +11,45 @@ function App() {
   const [currentMode, setCurrentMode] = React.useState("Session");
   const [timeLeft, setTimeLeft] = React.useState("25:00");
 
+  function updateBreakLength(isIncrement) {
+    if (isIncrement) {
+      if (currentMode === "Break") {
+        setTimeLeft(`${breakLength + 1}:00`);
+      }
+      setBreakLength((prevBreakLength) => prevBreakLength + 1);
+    } else {
+      if (currentMode === "Break") {
+        setTimeLeft(`${breakLength - 1}:00`);
+      }
+      setBreakLength((prevBreakLength) => prevBreakLength - 1);
+    }
+  }
+
+  function updateSessionLength(isIncrement) {
+    if (isIncrement) {
+      if (currentMode === "Session") {
+        setTimeLeft(`${sessionLength + 1}:00`);
+      }
+      setSessionLength((prevSessionLength) => prevSessionLength + 1);
+    } else {
+      if (currentMode === "Session") {
+        setTimeLeft(`${sessionLength - 1}:00`);
+      }
+      setSessionLength((prevSessionLength) => prevSessionLength - 1);
+    }
+  }
+
   return (
     <div className = "app-container">
       <h1>Pomodoro Clock</h1>
       <div className = "lengths-container">
         <BreakLength 
         breakLength = {breakLength}
+        updateBreakLength = {updateBreakLength}
         />
         <SessionLength 
         sessionLength = {sessionLength}
+        updateSessionLength = {updateSessionLength}
         />
       </div>
       <Timer 
