@@ -12,9 +12,9 @@ function App() {
   const [timeLeft, setTimeLeft] = React.useState("25:00");
 
   return (
-    <div>
+    <div className = "app-container">
       <h1>Pomodoro Clock</h1>
-      <div>
+      <div className = "lengths-container">
         <BreakLength 
         breakLength = {breakLength}
         />
@@ -27,7 +27,7 @@ function App() {
       timeLeft = {timeLeft}
       />
       <Controls />
-      <p>by <a href="https://github.com/lucy-c1/pomodoro">lucy-c1</a></p>
+      <p id = "credit">by <a href="https://github.com/lucy-c1/pomodoro" target='_blank'>lucy-c1</a></p>
     </div>
   )
 }

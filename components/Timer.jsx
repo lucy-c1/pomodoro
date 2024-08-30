@@ -7,7 +7,7 @@ Props:
 */
 export default function Timer(props) {
     return (
-        <div>
+        <div className = "timer-container">
             <h3 id = "timer-label">{props.currentMode}</h3>
             <h2 id = "time-left">{props.timeLeft}</h2>
         </div>
