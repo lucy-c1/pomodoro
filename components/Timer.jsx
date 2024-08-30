@@ -4,6 +4,7 @@ import React from "react"
 Props:
 - currentMode: can be session or break
 - timeLeft
+ 
 */
 export default function Timer(props) {
     return (
