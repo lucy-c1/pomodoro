@@ -1,6 +1,9 @@
 {
   "name": "Scrim-s00fsopfdn",
+  "homepage": "https://lucy-c1.github.io/pomodoro",
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist",
     "start": "vite",
     "dev": "vite",
     "build": "vite build",
@@ -13,6 +16,7 @@
     "vite": "latest"
   },
   "devDependencies": {
-    "@vitejs/plugin-react": "*"
+    "@vitejs/plugin-react": "*",
+    "gh-pages": "^6.1.1"
   }
 }
