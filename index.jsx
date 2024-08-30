@@ -128,7 +128,18 @@ function App() {
             console.log("timer reached 0");
             /* make a beeping sound */
             audioRef.current.play();
-            /* switch mode */
+            /* switch mode and update minutes and seconds */
+            setCurrentMode((prevCurrentMode) => {
+              if (prevCurrentMode === "Session") {
+                setMinutes(breakLength);
+                setSeconds(0);
+                return "Break";
+              } else {
+                setMinutes(sessionLength);
+                setSeconds(0);
+                return "Session";
+              }
+            })
           }
       }, 1000)
 
